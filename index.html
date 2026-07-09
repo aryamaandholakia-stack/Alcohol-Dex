@@ -4,41 +4,43 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AlcoholDex — Your Drinking Passport</title>
-<meta name="description" content="A collecting and discovery game for people who enjoy exploring drinks. Browse silhouettes, log bottles you've tried, and watch your collection come to life." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 240%27%3E%3Cpath d=%27M38 8 h24 v10 c0 4 2 6 2 10 v14 c0 6 10 12 12 22 v150 c0 12 -8 18 -20 18 h-12 c-12 0 -20 -6 -20 -18 v-150 c2 -10 12 -16 12 -22 v-14 c0 -4 2 -6 2 -10 z%27 fill=%27%23E39A2E%27/%3E%3C/svg%3E" />
+<meta name="description" content="Hundreds of bottles wait in the dark. Meet them in the real world, and watch your personal collection come to light." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 240%27%3E%3Cpath d=%27M38 8 h24 v10 c0 4 2 6 2 10 v14 c0 6 10 12 12 22 v150 c0 12 -8 18 -20 18 h-12 c-12 0 -20 -6 -20 -18 v-150 c2 -10 12 -16 12 -22 v-14 c0 -4 2 -6 2 -10 z%27 fill=%27%23C9A45C%27/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Figtree:wght@300;400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-<!-- Film grain overlay -->
+<!-- The living room: candlelight, dust, smoke -->
+<canvas id="atmosphere" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
-<!-- ======================= AGE GATE ======================= -->
+<!-- ======================= THE DOOR (age gate) ======================= -->
 <section id="view-agegate" class="gate hidden">
-  <div class="gate-card">
-    <div class="wordmark">Alcohol<span>Dex</span></div>
-    <p class="gate-line">A discovery game about appreciation, culture and curiosity.</p>
-    <h1 class="gate-q">Are you 18 or older?</h1>
+  <div class="gate-inner">
+    <span class="wordmark">A l c o h o l D e x</span>
+    <p class="eyebrow">The door</p>
+    <h1 class="gate-q">This establishment serves adults only. Are you 18 or older?</h1>
     <div class="gate-actions">
-      <button id="age-yes" class="btn btn-gold">Yes, I am 18+</button>
-      <button id="age-no" class="btn btn-ghost">No</button>
+      <button id="age-yes" class="btn">I am</button>
+      <button id="age-no" class="btn btn-quiet">Not yet</button>
     </div>
-    <p class="fineprint">AlcoholDex celebrates discovery, never overconsumption. Please drink responsibly.</p>
+    <p class="fineprint">AlcoholDex is about appreciation, never volume.<br/>Savor slowly. Drink responsibly.</p>
   </div>
 </section>
 
-<!-- ======================= AUTH ======================= -->
+<!-- ======================= THE GUESTBOOK (auth) ======================= -->
 <section id="view-auth" class="gate hidden">
-  <div class="gate-card">
-    <div class="wordmark">Alcohol<span>Dex</span></div>
-    <p class="gate-line">Your personal drinking passport. 350 bottles wait in shadow.</p>
+  <div class="gate-inner">
+    <span class="wordmark">A l c o h o l D e x</span>
+    <p class="gate-line" style="margin-top:2.5rem"><span id="auth-total">700</span> bottles wait in the dark. Sign the guestbook.</p>
 
     <div class="auth-tabs">
-      <button id="tab-signin" class="auth-tab active">Sign in</button>
-      <button id="tab-signup" class="auth-tab">Create account</button>
+      <button id="tab-signin" class="auth-tab active">Returning</button>
+      <button id="tab-signup" class="auth-tab">First visit</button>
     </div>
 
     <form id="auth-form" class="auth-form">
@@ -48,87 +50,119 @@
       <label>Password
         <input type="password" id="auth-password" autocomplete="current-password" required minlength="6" placeholder="••••••••" />
       </label>
-      <button type="submit" id="auth-submit" class="btn btn-gold btn-wide">Sign in</button>
+      <button type="submit" id="auth-submit" class="btn">Enter</button>
       <p id="auth-msg" class="auth-msg" role="alert"></p>
     </form>
 
-    <p class="fineprint" id="demo-note" hidden>Supabase isn't configured yet — running in local demo mode. Your collection is saved on this device only.</p>
+    <p class="fineprint" id="demo-note" hidden>Running in demo mode — your collection saves to this device only.</p>
   </div>
 </section>
 
-<!-- ======================= MAIN APP ======================= -->
-<div id="view-app" class="app hidden">
+<!-- ======================= THE ESTABLISHMENT ======================= -->
+<div id="view-app" class="app-shell hidden">
 
   <header class="topbar">
-    <div class="wordmark small">Alcohol<span>Dex</span></div>
-    <div class="counter" id="global-counter" title="Bottles discovered">
-      <span class="counter-num" id="counter-found">0</span>
-      <span class="counter-sep">/</span>
-      <span class="counter-total">350</span>
-      <span class="counter-label">discovered</span>
-    </div>
+    <span class="wordmark">A l c o h o l D e x</span>
     <nav class="topnav">
-      <button id="nav-dex" class="navbtn active">Dex</button>
+      <button id="nav-home" class="navbtn active">Home</button>
+      <button id="nav-dex" class="navbtn">The Dex</button>
       <button id="nav-profile" class="navbtn">Passport</button>
     </nav>
+    <div class="top-counter"><span id="counter-found">0</span> <span class="of">/ <span class="counter-total">700</span></span></div>
   </header>
 
-  <!-- Ad slot: paste your AdSense / ad network snippet inside .ad-inner -->
-  <div class="ad-slot" aria-label="Advertisement">
-    <div class="ad-inner">ad space</div>
-  </div>
+  <!-- ---------- HOME ---------- -->
+  <main id="page-home">
+    <section class="hero">
+      <div class="hero-scene" id="hero-scene" aria-hidden="true"></div>
+      <div class="hero-photo" aria-hidden="true"></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <p class="eyebrow rise">Your drinking passport</p>
+      <h1 class="headline rise"><span id="hero-total">700</span> bottles wait in the <em>dark.</em></h1>
+      <p class="lede rise">Every bottle stands in shadow until you meet it in the real world. No lists to follow, no rankings to obey — a collection filled only by living.</p>
+      <button id="cta-enter" class="btn rise">Enter the Dex</button>
+    </section>
 
-  <!-- ---------- DEX VIEW ---------- -->
-  <main id="page-dex">
+    <section class="home-section">
+      <span class="eyebrow rise">The Twenty</span>
+      <h2 class="headline rise">Twenty bottles can't be bought into your Dex. Only <em>poured.</em></h2>
+      <p class="lede rise">Somewhere between a friend's wedding and a basement bar in Tokyo, a legendary will find you. When it does, you'll know.</p>
+      <div class="twenty-row rise" id="home-twenty"></div>
+    </section>
+
+    <section class="home-section">
+      <span class="eyebrow rise">How the room works</span>
+      <div class="how">
+        <div class="how-step rise"><div class="step-n">i.</div><h3>Drink in the world</h3><p>A rooftop in Bandra, a wedding in Jaipur, a dive in Lisbon. The Dex only counts what you've truly tasted.</p></div>
+        <div class="how-step rise"><div class="step-n">ii.</div><h3>Tell the bartender</h3><p>Name what you drank. The bartender finds it on the shelf — typos, nicknames and all.</p></div>
+        <div class="how-step rise"><div class="step-n">iii.</div><h3>Watch it come to light</h3><p>The stranger becomes a bottle: its color, its story, what to mix it with. The room remembers every one.</p></div>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-label="Advertisement"><div class="ad-inner">ad space</div></div>
+  </main>
+
+  <!-- ---------- THE DEX ---------- -->
+  <main id="page-dex" class="hidden">
+    <div class="dex-head">
+      <span class="eyebrow">The Dex</span>
+      <h2 class="headline" id="dex-line">You have met 0. The rest remain <em>strangers.</em></h2>
+    </div>
+
     <div class="bartender">
       <div class="bartender-label">Just tried something? Tell the bartender.</div>
       <div class="bartender-row">
-        <input type="text" id="bartender-input" placeholder="e.g. Lagavulin 16, Aperol, Dassai…" autocomplete="off" />
-        <button id="bartender-go" class="btn btn-gold">Find it</button>
+        <input type="text" id="bartender-input" placeholder="Lagavulin 16, Old Monk, Sula Rasa…" autocomplete="off" />
+        <button id="bartender-go" class="btn">Find it</button>
       </div>
       <div id="bartender-results" class="bartender-results"></div>
     </div>
+
     <div class="controls">
       <div class="chips" id="category-chips"></div>
       <div class="control-row">
-        <input type="search" id="search" placeholder="Search bottles, countries, flavors…" />
-        <label class="toggle"><input type="checkbox" id="filter-undiscovered" /> <span>Hide discovered</span></label>
+        <input type="search" id="search" placeholder="Search the shelves…" />
+        <label class="toggle"><input type="checkbox" id="filter-undiscovered" /> <span>Strangers only</span></label>
       </div>
     </div>
     <div class="grid" id="bottle-grid"></div>
   </main>
 
-  <!-- ---------- PROFILE VIEW ---------- -->
+  <!-- ---------- THE PASSPORT ---------- -->
   <main id="page-profile" class="hidden">
-    <div class="profile-head">
-      <h2 class="serif">Your Passport</h2>
-      <p class="profile-email" id="profile-email"></p>
+    <div class="passport-head">
+      <span class="eyebrow">The Passport</span>
+      <div class="pass-count"><span id="stat-total">0</span><span class="of">/<span class="pass-total">700</span></span></div>
+      <div class="pass-sub">bottles met</div>
+      <p class="pass-email" id="profile-email"></p>
     </div>
 
     <div class="stat-row">
-      <div class="stat"><div class="stat-num" id="stat-total">0</div><div class="stat-label">bottles logged</div></div>
-      <div class="stat"><div class="stat-num" id="stat-countries">0</div><div class="stat-label">countries</div></div>
-      <div class="stat"><div class="stat-num gold" id="stat-legendaries">0<span class="stat-frac">/20</span></div><div class="stat-label">legendaries</div></div>
-      <div class="stat"><div class="stat-num" id="stat-pct">0%</div><div class="stat-label">complete</div></div>
+      <div class="stat"><div class="stat-num" id="stat-countries">0</div><div class="stat-label">Countries</div></div>
+      <div class="stat"><div class="stat-num gold" id="stat-legendaries">0<span class="stat-frac">/20</span></div><div class="stat-label">The Twenty</div></div>
+      <div class="stat"><div class="stat-num" id="stat-pct">0%</div><div class="stat-label">Complete</div></div>
     </div>
 
-    <h3 class="section-title">By category</h3>
+    <div class="photo-band"><blockquote id="pass-quote">"The room remembers every one."</blockquote></div>
+
+    <span class="eyebrow section-title">The shelves</span>
     <div id="category-progress" class="cat-progress"></div>
 
-    <h3 class="section-title">Badges</h3>
+    <span class="eyebrow section-title">Honors</span>
     <div id="badge-grid" class="badge-grid"></div>
 
     <div class="profile-actions">
-      <button id="btn-signout" class="btn btn-ghost">Sign out</button>
+      <button id="btn-share" class="btn btn-solid">Share your passport</button>
+      <button id="btn-signout" class="btn btn-quiet">Leave quietly</button>
     </div>
   </main>
 
   <footer class="footer">
-    <p>AlcoholDex is about appreciation, not volume. Savor slowly — <strong>drink responsibly</strong>. 18+ only.</p>
+    <p><span class="f-mark">The Dex, wherever you drink.</span><br/>Appreciation, never volume. Drink responsibly. 18+ only.</p>
   </footer>
 </div>
 
-<!-- ======================= BOTTLE MODAL ======================= -->
+<!-- ======================= THE PORTRAIT (bottle modal) ======================= -->
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
   <div class="modal-backdrop" id="modal-backdrop"></div>
   <div class="modal-card" id="modal-card">
@@ -137,29 +171,34 @@
     <div class="modal-bottle" id="modal-bottle"></div>
     <div class="modal-info">
       <div class="modal-eyebrow" id="m-eyebrow"></div>
-      <h2 class="modal-name serif" id="m-name">???</h2>
-      <div class="modal-meta" id="m-meta"></div>
+      <h2 class="modal-name" id="m-name">???</h2>
+      <div class="modal-stats" id="m-stats"></div>
       <div class="modal-tags" id="m-tags"></div>
+      <div class="modal-mix" id="m-mix"></div>
       <p class="modal-fact" id="m-fact"></p>
-      <p class="modal-serve" id="m-serve"></p>
+      <p class="modal-met" id="m-met"></p>
       <p class="modal-hint" id="m-hint"></p>
       <div class="modal-actions">
-        <button id="btn-log" class="btn btn-gold btn-wide">I've tried this — log it</button>
-        <button id="btn-unlog" class="btn btn-ghost btn-small hidden">Remove from collection</button>
+        <button id="btn-log" class="btn btn-solid">I've met this bottle — log it</button>
+        <button id="btn-unlog" class="unlog-link hidden">Strike it from the record</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Toast + confetti layer -->
 <div id="toast" class="toast hidden"></div>
 <canvas id="confetti" class="confetti"></canvas>
+<canvas id="share-canvas" width="1080" height="1920" style="display:none"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/config.js"></script>
 <script src="js/catalog.js"></script>
+<script src="js/catalog-expansion.js"></script>
 <script src="js/shapes.js"></script>
 <script src="js/badges.js"></script>
+<script src="js/cocktails.js"></script>
+<script src="js/atmosphere.js"></script>
+<script src="js/share.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
