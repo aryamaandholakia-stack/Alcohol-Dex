@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AlcoholDex — Your Drinking Passport</title>
-<meta name="description" content="Hundreds of bottles wait in the dark. Meet them in the real world, and watch your personal collection come to light." />
+<title>The Pokédex — A Passport for the Real World</title>
+<meta name="description" content="Seven collections of real-world collectibles — bottles, bars, thrills, friendships, countries. Every one waits in the dark until you live it." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 240%27%3E%3Cpath d=%27M38 8 h24 v10 c0 4 2 6 2 10 v14 c0 6 10 12 12 22 v150 c0 12 -8 18 -20 18 h-12 c-12 0 -20 -6 -20 -18 v-150 c2 -10 12 -16 12 -22 v-14 c0 -4 2 -6 2 -10 z%27 fill=%27%23C9A45C%27/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,22 +21,22 @@
 <!-- ======================= THE DOOR (age gate) ======================= -->
 <section id="view-agegate" class="gate hidden">
   <div class="gate-inner">
-    <span class="wordmark">A l c o h o l D e x</span>
+    <span class="wordmark">T h e&ensp;P o k é d e x</span>
     <p class="eyebrow">The door</p>
-    <h1 class="gate-q">This establishment serves adults only. Are you 18 or older?</h1>
+    <h1 class="gate-q">One of our rooms is a bar. The whole house serves adults only. Are you 18 or older?</h1>
     <div class="gate-actions">
       <button id="age-yes" class="btn">I am</button>
       <button id="age-no" class="btn btn-quiet">Not yet</button>
     </div>
-    <p class="fineprint">AlcoholDex is about appreciation, never volume.<br/>Savor slowly. Drink responsibly.</p>
+    <p class="fineprint">The Pokédex is about living, never volume.<br/>Savor slowly. Drink responsibly.</p>
   </div>
 </section>
 
 <!-- ======================= THE GUESTBOOK (auth) ======================= -->
 <section id="view-auth" class="gate hidden">
   <div class="gate-inner">
-    <span class="wordmark">A l c o h o l D e x</span>
-    <p class="gate-line" style="margin-top:2.5rem"><span id="auth-total">700</span> bottles wait in the dark. Sign the guestbook.</p>
+    <span class="wordmark">T h e&ensp;P o k é d e x</span>
+    <p class="gate-line" style="margin-top:2.5rem"><span id="auth-total">971</span> collectibles wait in the dark. Sign the guestbook.</p>
 
     <div class="auth-tabs">
       <button id="tab-signin" class="auth-tab active">Returning</button>
@@ -62,10 +62,10 @@
 <div id="view-app" class="app-shell hidden">
 
   <header class="topbar">
-    <span class="wordmark">A l c o h o l D e x</span>
+    <span class="wordmark">T h e&ensp;P o k é d e x</span>
     <nav class="topnav">
       <button id="nav-home" class="navbtn active">Home</button>
-      <button id="nav-dex" class="navbtn">The Dex</button>
+      <button id="nav-dex" class="navbtn">AlcoholDex</button>
       <button id="nav-profile" class="navbtn">Passport</button>
     </nav>
     <div class="top-counter"><span id="counter-found">0</span> <span class="of">/ <span class="counter-total">700</span></span></div>
@@ -77,25 +77,25 @@
       <div class="hero-scene" id="hero-scene" aria-hidden="true"></div>
       <div class="hero-photo" aria-hidden="true"></div>
       <div class="hero-scrim" aria-hidden="true"></div>
-      <p class="eyebrow rise">Your drinking passport</p>
-      <h1 class="headline rise"><span id="hero-total">700</span> bottles wait in the <em>dark.</em></h1>
-      <p class="lede rise">Every bottle stands in shadow until you meet it in the real world. No lists to follow, no rankings to obey — a collection filled only by living.</p>
-      <button id="cta-enter" class="btn rise">Enter the Dex</button>
+      <p class="eyebrow rise">A passport for the real world</p>
+      <h1 class="headline rise">The internet remembers everything you watched. Nothing you <em>lived.</em></h1>
+      <p class="lede rise">One treasure hunt and six field lists — <span id="hero-total">971</span> collectibles across bars and deserts, border posts and strangers' dinner tables. The hunt plays by Pokémon rules: hidden until lived. The lists you may reveal, and scheme against.</p>
+      <button id="cta-enter" class="btn rise">Choose a collection</button>
     </section>
 
     <section class="home-section">
-      <span class="eyebrow rise">The Twenty</span>
-      <h2 class="headline rise">Twenty bottles can't be bought into your Dex. Only <em>poured.</em></h2>
-      <p class="lede rise">Somewhere between a friend's wedding and a basement bar in Tokyo, a legendary will find you. When it does, you'll know.</p>
-      <div class="twenty-row rise" id="home-twenty"></div>
+      <span class="eyebrow rise">The archive</span>
+      <h2 class="headline rise">Seven dexes. Choose your <em>obsession.</em></h2>
+      <p class="lede rise">You have collected <span id="global-count" class="gold">0</span> so far, across every room in the house.</p>
+      <div class="dex-grid-home rise" id="dex-grid-home"></div>
     </section>
 
     <section class="home-section">
-      <span class="eyebrow rise">How the room works</span>
+      <span class="eyebrow rise">How the house works</span>
       <div class="how">
-        <div class="how-step rise"><div class="step-n">i.</div><h3>Drink in the world</h3><p>A rooftop in Bandra, a wedding in Jaipur, a dive in Lisbon. The Dex only counts what you've truly tasted.</p></div>
-        <div class="how-step rise"><div class="step-n">ii.</div><h3>Tell the bartender</h3><p>Name what you drank. The bartender finds it on the shelf — typos, nicknames and all.</p></div>
-        <div class="how-step rise"><div class="step-n">iii.</div><h3>Watch it come to light</h3><p>The stranger becomes a bottle: its color, its story, what to mix it with. The room remembers every one.</p></div>
+        <div class="how-step rise"><div class="step-n">i.</div><h3>Live it in the world</h3><p>A speakeasy in Tokyo, a border crossing at dawn, a friend made without a shared language. The Dex only counts what actually happened.</p></div>
+        <div class="how-step rise"><div class="step-n">ii.</div><h3>Tell the keeper</h3><p>Every collection has one — a bartender, a doorman, a border officer. Name what you lived. They'll find it on the shelf.</p></div>
+        <div class="how-step rise"><div class="step-n">iii.</div><h3>Watch it come to light</h3><p>The stranger becomes a story: its stamp, its detail, how to do it properly next time. The house remembers every one.</p></div>
       </div>
     </section>
 
@@ -105,12 +105,14 @@
   <!-- ---------- THE DEX ---------- -->
   <main id="page-dex" class="hidden">
     <div class="dex-head">
-      <span class="eyebrow">The Dex</span>
+      <span class="eyebrow" id="dex-title">AlcoholDex</span>
       <h2 class="headline" id="dex-line">You have met 0. The rest remain <em>strangers.</em></h2>
+      <p class="lede" id="dex-note" style="margin-top:0.9rem"></p>
+      <div class="twenty-row" id="dex-gems" style="margin-top:1.4rem"></div>
     </div>
 
     <div class="bartender">
-      <div class="bartender-label">Just tried something? Tell the bartender.</div>
+      <div class="bartender-label" id="bartender-label">Just tried something? Tell the bartender.</div>
       <div class="bartender-row">
         <input type="text" id="bartender-input" placeholder="Lagavulin 16, Old Monk, Sula Rasa…" autocomplete="off" />
         <button id="bartender-go" class="btn">Find it</button>
@@ -123,6 +125,7 @@
       <div class="control-row">
         <input type="search" id="search" placeholder="Search the shelves…" />
         <label class="toggle"><input type="checkbox" id="filter-undiscovered" /> <span>Strangers only</span></label>
+        <label class="toggle" id="reveal-wrap"><input type="checkbox" id="filter-reveal" /> <span>Reveal the list</span></label>
       </div>
     </div>
     <div class="grid" id="bottle-grid"></div>
@@ -133,32 +136,41 @@
     <div class="passport-head">
       <span class="eyebrow">The Passport</span>
       <div class="pass-count"><span id="stat-total">0</span><span class="of">/<span class="pass-total">700</span></span></div>
-      <div class="pass-sub">bottles met</div>
+      <div class="pass-sub">collected, across every dex</div>
       <p class="pass-email" id="profile-email"></p>
     </div>
 
     <div class="stat-row">
       <div class="stat"><div class="stat-num" id="stat-countries">0</div><div class="stat-label">Countries</div></div>
-      <div class="stat"><div class="stat-num gold" id="stat-legendaries">0<span class="stat-frac">/20</span></div><div class="stat-label">The Twenty</div></div>
+      <div class="stat"><div class="stat-num gold" id="stat-legendaries">0<span class="stat-frac">/50</span></div><div class="stat-label">Legendaries</div></div>
       <div class="stat"><div class="stat-num" id="stat-pct">0%</div><div class="stat-label">Complete</div></div>
     </div>
 
     <div class="photo-band"><blockquote id="pass-quote">"The room remembers every one."</blockquote></div>
 
-    <span class="eyebrow section-title">The shelves</span>
+    <div id="taste-section" class="hidden">
+      <span class="eyebrow section-title">The palate</span>
+      <p class="taste-line" id="taste-line"></p>
+    </div>
+
+    <span class="eyebrow section-title">The collections</span>
     <div id="category-progress" class="cat-progress"></div>
+
+    <span class="eyebrow section-title">The circle</span>
+    <div id="circle-body" class="cat-progress"></div>
 
     <span class="eyebrow section-title">Honors</span>
     <div id="badge-grid" class="badge-grid"></div>
 
     <div class="profile-actions">
       <button id="btn-share" class="btn btn-solid">Share your passport</button>
+      <button id="btn-sound" class="btn btn-quiet">The clink: on</button>
       <button id="btn-signout" class="btn btn-quiet">Leave quietly</button>
     </div>
   </main>
 
   <footer class="footer">
-    <p><span class="f-mark">The Dex, wherever you drink.</span><br/>Appreciation, never volume. Drink responsibly. 18+ only.</p>
+    <p><span class="f-mark">The Dex, wherever you live.</span><br/>Collect experiences, never excess. Drink responsibly. 18+ only.</p>
   </footer>
 </div>
 
@@ -177,6 +189,9 @@
       <div class="modal-mix" id="m-mix"></div>
       <p class="modal-fact" id="m-fact"></p>
       <p class="modal-met" id="m-met"></p>
+      <p class="modal-rarity" id="m-rarity"></p>
+      <div class="modal-rate" id="m-rate"></div>
+      <div class="modal-reco" id="m-reco"></div>
       <p class="modal-hint" id="m-hint"></p>
       <div class="modal-actions">
         <button id="btn-log" class="btn btn-solid">I've met this bottle — log it</button>
@@ -194,10 +209,19 @@
 <script src="js/config.js"></script>
 <script src="js/catalog.js"></script>
 <script src="js/catalog-expansion.js"></script>
+<script src="js/dexes.js"></script>
+<script src="js/dex-bars.js"></script>
+<script src="js/dex-thrills.js"></script>
+<script src="js/dex-xp.js"></script>
+<script src="js/dex-friends.js"></script>
+<script src="js/dex-countries.js"></script>
+<script src="js/dex-dubai.js"></script>
 <script src="js/shapes.js"></script>
+<script src="js/stamps.js"></script>
 <script src="js/badges.js"></script>
 <script src="js/cocktails.js"></script>
 <script src="js/atmosphere.js"></script>
+<script src="js/features.js"></script>
 <script src="js/share.js"></script>
 <script src="js/app.js"></script>
 </body>
