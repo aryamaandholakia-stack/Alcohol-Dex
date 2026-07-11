@@ -36,7 +36,7 @@
 <section id="view-auth" class="gate hidden">
   <div class="gate-inner">
     <span class="wordmark">T h e&ensp;P o k é d e x</span>
-    <p class="gate-line" style="margin-top:2.5rem"><span id="auth-total">971</span> collectibles wait in the dark. Sign the guestbook.</p>
+    <p class="gate-line" style="margin-top:2.5rem"><span id="auth-total">1474</span> collectibles wait in the dark. Sign the guestbook.</p>
 
     <div class="auth-tabs">
       <button id="tab-signin" class="auth-tab active">Returning</button>
@@ -67,6 +67,7 @@
       <button id="nav-home" class="navbtn active">Home</button>
       <button id="nav-dex" class="navbtn">AlcoholDex</button>
       <button id="nav-profile" class="navbtn">Passport</button>
+      <button id="btn-mode" class="navbtn mode-btn" title="Switch catalog view">Editor's mode</button>
     </nav>
     <div class="top-counter"><span id="counter-found">0</span> <span class="of">/ <span class="counter-total">700</span></span></div>
   </header>
@@ -79,7 +80,7 @@
       <div class="hero-scrim" aria-hidden="true"></div>
       <p class="eyebrow rise">A passport for the real world</p>
       <h1 class="headline rise">The internet remembers everything you watched. Nothing you <em>lived.</em></h1>
-      <p class="lede rise">One treasure hunt and six field lists — <span id="hero-total">971</span> collectibles across bars and deserts, border posts and strangers' dinner tables. The hunt plays by Pokémon rules: hidden until lived. The lists you may reveal, and scheme against.</p>
+      <p class="lede rise">One treasure hunt and six field lists — <span id="hero-total">1474</span> collectibles across bars and deserts, border posts and strangers' dinner tables. The hunt plays by Pokémon rules: hidden until lived. The lists you may reveal, and scheme against.</p>
       <button id="cta-enter" class="btn rise">Choose a collection</button>
     </section>
 
@@ -88,6 +89,16 @@
       <h2 class="headline rise">Seven dexes. Choose your <em>obsession.</em></h2>
       <p class="lede rise">You have collected <span id="global-count" class="gold">0</span> so far, across every room in the house.</p>
       <div class="dex-grid-home rise" id="dex-grid-home"></div>
+    </section>
+
+    <section class="home-section">
+      <span class="eyebrow rise">The concierge desk</span>
+      <h2 class="headline rise">Going somewhere? The house has <em>opinions.</em></h2>
+      <p class="lede rise">Name a city or a country. Every uncollected thing there — across all seven dexes — reports for duty.</p>
+      <div class="bartender rise" style="margin-top:1.6rem">
+        <input id="trip-input" type="text" placeholder="Tokyo, Kerala, Mexico, Lisbon…" autocomplete="off" />
+      </div>
+      <div id="trip-results"></div>
     </section>
 
     <section class="home-section">
@@ -120,6 +131,7 @@
       <div id="bartender-results" class="bartender-results"></div>
     </div>
 
+    <div id="intake" class="intake hidden"></div>
     <div class="controls">
       <div class="chips" id="category-chips"></div>
       <div class="control-row">
@@ -137,6 +149,7 @@
       <span class="eyebrow">The Passport</span>
       <div class="pass-count"><span id="stat-total">0</span><span class="of">/<span class="pass-total">700</span></span></div>
       <div class="pass-sub">collected, across every dex</div>
+      <div class="chips" id="pass-scope" style="margin-top:1.6rem"></div>
       <p class="pass-email" id="profile-email"></p>
     </div>
 
@@ -153,17 +166,28 @@
       <p class="taste-line" id="taste-line"></p>
     </div>
 
+    <div id="ledger-section">
     <span class="eyebrow section-title">The collections</span>
     <div id="category-progress" class="cat-progress"></div>
+    </div>
 
     <span class="eyebrow section-title">The circle</span>
     <div id="circle-body" class="cat-progress"></div>
 
+    <div id="badges-section">
     <span class="eyebrow section-title">Honors</span>
     <div id="badge-grid" class="badge-grid"></div>
+    </div>
+
+    <div id="duo-section">
+    <span class="eyebrow section-title">The duo</span>
+    <p class="lede" style="margin:0.6rem 0 1rem">Two passports, one ledger. Pick a mutual from The Circle.</p>
+    <div id="duo-body"></div>
+    </div>
 
     <div class="profile-actions">
       <button id="btn-share" class="btn btn-solid">Share your passport</button>
+      <button id="btn-year" class="btn btn-quiet">Your year</button>
       <button id="btn-sound" class="btn btn-quiet">The clink: on</button>
       <button id="btn-signout" class="btn btn-quiet">Leave quietly</button>
     </div>
@@ -195,7 +219,8 @@
       <p class="modal-hint" id="m-hint"></p>
       <div class="modal-actions">
         <button id="btn-log" class="btn btn-solid">I've met this bottle — log it</button>
-        <button id="btn-unlog" class="unlog-link hidden">Strike it from the record</button>
+        <button id="m-share" class="btn btn-quiet hidden">Share this</button>
+          <button id="btn-unlog" class="unlog-link hidden">Strike it from the record</button>
       </div>
     </div>
   </div>
@@ -215,6 +240,7 @@
 <script src="js/dex-xp.js"></script>
 <script src="js/dex-friends.js"></script>
 <script src="js/dex-countries.js"></script>
+<script src="js/dex-books.js"></script>
 <script src="js/dex-dubai.js"></script>
 <script src="js/shapes.js"></script>
 <script src="js/stamps.js"></script>
@@ -223,6 +249,7 @@
 <script src="js/atmosphere.js"></script>
 <script src="js/features.js"></script>
 <script src="js/share.js"></script>
+<script src="js/share-item.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
