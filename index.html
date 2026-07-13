@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 240%27%3E%3Cpath d=%27M38 8 h24 v10 c0 4 2 6 2 10 v14 c0 6 10 12 12 22 v150 c0 12 -8 18 -20 18 h-12 c-12 0 -20 -6 -20 -18 v-150 c2 -10 12 -16 12 -22 v-14 c0 -4 2 -6 2 -10 z%27 fill=%27%23C9A45C%27/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Figtree:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Figtree:wght@300;400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -36,7 +36,7 @@
 <section id="view-auth" class="gate hidden">
   <div class="gate-inner">
     <span class="wordmark">T h e&ensp;P o k é d e x</span>
-    <p class="gate-line" style="margin-top:2.5rem"><span id="auth-total">1474</span> collectibles wait in the dark. Sign the guestbook.</p>
+    <p class="gate-line" style="margin-top:2.5rem"><span id="auth-total">1472</span> collectibles wait in the dark. Sign the guestbook.</p>
 
     <div class="auth-tabs">
       <button id="tab-signin" class="auth-tab active">Returning</button>
@@ -66,6 +66,7 @@
     <nav class="topnav">
       <button id="nav-home" class="navbtn active">Home</button>
       <button id="nav-dex" class="navbtn">AlcoholDex</button>
+      <button id="nav-globe" class="navbtn">Your globe</button>
       <button id="nav-profile" class="navbtn">Passport</button>
       <button id="btn-mode" class="navbtn mode-btn" title="Switch catalog view">Editor's mode</button>
     </nav>
@@ -75,13 +76,13 @@
   <!-- ---------- HOME ---------- -->
   <main id="page-home">
     <section class="hero">
-      <div class="hero-scene" id="hero-scene" aria-hidden="true"></div>
-      <div class="hero-photo" aria-hidden="true"></div>
+      <div id="woven-canvas" aria-hidden="true"></div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <p class="eyebrow rise">A passport for the real world</p>
       <h1 class="headline rise">The internet remembers everything you watched. Nothing you <em>lived.</em></h1>
-      <p class="lede rise">One treasure hunt and six field lists — <span id="hero-total">1474</span> collectibles across bars and deserts, border posts and strangers' dinner tables. The hunt plays by Pokémon rules: hidden until lived. The lists you may reveal, and scheme against.</p>
-      <button id="cta-enter" class="btn rise">Choose a collection</button>
+      <p class="lede rise">The Collector’s Dex and The List — <span id="hero-total">1472</span> collectibles across bars and deserts, border posts and strangers' dinner tables. The hunt plays by Pokémon rules: hidden until lived. The lists you may reveal, and scheme against.</p>
+      <p class="dex-quote rise" id="home-quote" style="margin-top:1.6rem"></p>
+      <button id="cta-enter" class="btn btn-glass rise">Explore the collection</button>
     </section>
 
     <section class="home-section">
@@ -119,6 +120,7 @@
       <span class="eyebrow" id="dex-title">AlcoholDex</span>
       <h2 class="headline" id="dex-line">You have met 0. The rest remain <em>strangers.</em></h2>
       <p class="lede" id="dex-note" style="margin-top:0.9rem"></p>
+      <p class="dex-quote" id="dex-quote"></p>
       <div class="twenty-row" id="dex-gems" style="margin-top:1.4rem"></div>
     </div>
 
@@ -133,6 +135,7 @@
 
     <div id="intake" class="intake hidden"></div>
     <div class="controls">
+      <select class="ledger-select" aria-label="Active ledger"></select>
       <div class="chips" id="category-chips"></div>
       <div class="control-row">
         <input type="search" id="search" placeholder="Search the shelves…" />
@@ -144,12 +147,28 @@
   </main>
 
   <!-- ---------- THE PASSPORT ---------- -->
+  <main id="page-globe" class="hidden">
+    <section class="home-section" style="padding-top:3.5rem">
+      <span class="eyebrow rise">Your globe</span>
+      <h2 class="headline rise">Every pin, a thing actually <em>lived.</em></h2>
+      <p class="lede rise" id="globe-line"></p>
+      <select class="ledger-select" aria-label="Active ledger" style="margin:0.6rem 0 1rem"></select>
+      <div id="globe-wrap" class="rise">
+        <div id="globe-canvas"></div>
+        <div id="globe-label"></div>
+      </div>
+      <p class="dex-quote" style="margin-top:1.4rem">Drag to spin. Hover a pin for the count, click it for the receipts.</p>
+    </section>
+  </main>
+
   <main id="page-profile" class="hidden">
     <div class="passport-head">
       <span class="eyebrow">The Passport</span>
       <div class="pass-count"><span id="stat-total">0</span><span class="of">/<span class="pass-total">700</span></span></div>
       <div class="pass-sub">collected, across every dex</div>
+      <p class="dex-quote" id="pass-bourdain" style="margin-top:1rem"></p>
       <div class="chips" id="pass-scope" style="margin-top:1.6rem"></div>
+      <select class="ledger-select" aria-label="Active ledger" style="margin-top:0.9rem"></select>
       <p class="pass-email" id="profile-email"></p>
     </div>
 
@@ -171,18 +190,12 @@
     <div id="category-progress" class="cat-progress"></div>
     </div>
 
-    <span class="eyebrow section-title">The circle</span>
+    <span class="eyebrow section-title">The circles — shared passports</span>
     <div id="circle-body" class="cat-progress"></div>
 
     <div id="badges-section">
     <span class="eyebrow section-title">Honors</span>
     <div id="badge-grid" class="badge-grid"></div>
-    </div>
-
-    <div id="duo-section">
-    <span class="eyebrow section-title">The duo</span>
-    <p class="lede" style="margin:0.6rem 0 1rem">Two passports, one ledger. Pick a mutual from The Circle.</p>
-    <div id="duo-body"></div>
     </div>
 
     <div class="profile-actions">
@@ -234,14 +247,13 @@
 <script src="js/config.js"></script>
 <script src="js/catalog.js"></script>
 <script src="js/catalog-expansion.js"></script>
+<script src="js/catalog-expansion-2.js"></script>
 <script src="js/dexes.js"></script>
 <script src="js/dex-bars.js"></script>
-<script src="js/dex-thrills.js"></script>
 <script src="js/dex-xp.js"></script>
+<script src="js/dex-thrills.js"></script>
 <script src="js/dex-friends.js"></script>
 <script src="js/dex-countries.js"></script>
-<script src="js/dex-books.js"></script>
-<script src="js/dex-dubai.js"></script>
 <script src="js/shapes.js"></script>
 <script src="js/stamps.js"></script>
 <script src="js/badges.js"></script>
@@ -251,5 +263,8 @@
 <script src="js/share.js"></script>
 <script src="js/share-item.js"></script>
 <script src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/woven.js"></script>
+<script src="js/globe.js"></script>
 </body>
 </html>
